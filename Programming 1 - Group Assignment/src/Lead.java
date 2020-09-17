@@ -127,6 +127,12 @@ public class Lead {
 
         } while ((checkRepeat == 'Y') || (checkRepeat == 'y'));
     }
+
+    public void displayLeadsByAges() {
+
+        LeadAgeDisplay lad = new LeadAgeDisplay();
+        lad.leadAgeDisplay();
+    }
 }
 
 

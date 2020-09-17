@@ -1,2 +1,10 @@
-inter_001,2000-02-02,lead_001,Email,positive
-inter_003,2000-05-05,lead_001,Social media,negative
+inter_001,2000-05-05,lead_001,Email,positive
+inter_003,2001-05-05,lead_001,Social media,positive
+inter_004,2002-05-05,lead_001,Social media,positive
+inter_005,2003-05-05,lead_001,Social media,positive
+inter_006,2004-05-05,lead_001,Social media,neutral
+inter_007,2005-05-05,lead_001,Social media,neutral
+inter_008,2006-05-05,lead_001,Social media,neutral
+inter_009,2007-05-05,lead_001,Social media,negative
+inter_010,2008-05-05,lead_001,Social media,negative
+inter_011,2009-05-05,lead_001,Social media,negative

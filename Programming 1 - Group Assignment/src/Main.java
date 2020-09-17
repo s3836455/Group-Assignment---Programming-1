@@ -29,18 +29,24 @@ public class Main {
             }
         }
 
+        Lead l = new Lead();
+        l.displayLeadsByAges();
+
+        InteractionPotentialDisplay a = new InteractionPotentialDisplay();
+        a.interactionPotentialDisplay();
+
 //        Lead l = new Lead();
 //        l.getLeadsInput();
 //        l.displayLeadsAll();
 //        l.displayLeadsOne();
 //        l.deleteLeads();
 //        l.updateLeads();
-
-        Interaction i = new Interaction();
-        i.getIntersInput();
-        i.displayIntersAll();
-        i.displayIntersOne();
-        i.deleteInters();
-        i.updateInters();
+//
+//        Interaction i = new Interaction();
+//        i.getIntersInput();
+//        i.displayIntersAll();
+//        i.displayIntersOne();
+//        i.deleteInters();
+//        i.updateInters();
     }
 }
