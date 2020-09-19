@@ -50,8 +50,8 @@ public class LeadAgeDisplay {
 
         System.out.println("NUMBER OF LEADS BY AGES");
         System.out.println("-----------------------");
-        System.out.println("|    0-10(years old) |   10-20(years old) |   20-60(years old) |     >60(years old) |");
-        System.out.println("|" + String.format("% 19d", count_0to10) + " |" + String.format("% 19d", count_10to20) + " |" + String.format("% 19d", count_20to60) + " |" + String.format("% 19d", count_over60) + " |");
+        System.out.println("| " + String.format("%1$18s", "0-10(years old)") + " | " + String.format("%1$18s", "10-20(years old)") + " | " + String.format("%1$18s", "20-60(years old)") + " | " + String.format("%1$18s", "over 60(years old)") + " |");
+        System.out.println("| " + String.format("%1$18d", count_0to10) + " | " + String.format("%1$18d", count_10to20) + " | " + String.format("%1$18d", count_20to60) + " | " + String.format("%1$18d", count_over60) + " |");
         System.out.println();
     }
 }

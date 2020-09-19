@@ -1,12 +1,12 @@
 import java.io.File;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.text.ParseException;
 import java.util.Scanner;
 
-public class InteractionPotentialDisplay {
+public class InteractionMonthDisplay {
 
-    public void interactionPotentialDisplay() {
+    public void interactionMonthDisplay() {
 
         int checkDateInput;
         String startDateInput;
@@ -18,13 +18,9 @@ public class InteractionPotentialDisplay {
         SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
         SimpleDateFormat readsdf = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat printsdf = new SimpleDateFormat("MMM dd yyyy");
+        SimpleDateFormat printFormat = new SimpleDateFormat("MMM yyyy");
         sdf.setLenient(false);
-        int countPositive = 0;
-        int countNeutral = 0;
-        int countNegative = 0;
         Date date;
-        String potential;
-
 
         do {
             checkDateInput = 0;
@@ -59,12 +55,20 @@ public class InteractionPotentialDisplay {
                     checkDateInput = 1;
                 }
             } catch (ParseException e) {
-                    System.out.println("Incorrect date format!");
-                    System.out.println("Please enter this information again.");
-                    System.out.println();
-                    checkDateInput = 1;
+                System.out.println("Incorrect date format!");
+                System.out.println("Please enter this information again.");
+                System.out.println();
+                checkDateInput = 1;
             }
         } while (checkDateInput == 1);
+
+        int startYear = startDate.getYear() + 1900;
+        int endYear = endDate.getYear() + 1900;
+        int differenceInYear = endYear - startYear + 1;
+        int[][] count = new int[differenceInYear][12];
+        String[][] countDate = new String[differenceInYear][12];
+        int dateYear;
+        int dateMonth;
 
         try {
             Scanner x = new Scanner(new File("interactions.csv"));
@@ -75,15 +79,19 @@ public class InteractionPotentialDisplay {
                 date = readsdf.parse(x.next());
                 x.next();
                 x.next();
-                potential = x.next();
+                x.next();
+
+                dateYear = date.getYear() + 1900;
+                dateMonth = date.getMonth();
 
                 if (((date.getTime() - startDate.getTime()) >= 0) && ((date.getTime() - endDate.getTime()) <= 0)) {
-                    if (potential.equals("positive")) {
-                        countPositive++;
-                    } else if (potential.equals("neutral")) {
-                        countNeutral++;
-                    } else {
-                        countNegative++;
+                    for (int a = 0; a < differenceInYear; a++) {
+                        for (int b = 0; b < 12; b++) {
+                            if (((a+startYear) == dateYear) && (b == dateMonth)) {
+                                count[a][b]++;
+                                countDate[a][b] = printFormat.format(date);
+                            }
+                        }
                     }
                 }
             }
@@ -93,11 +101,26 @@ public class InteractionPotentialDisplay {
             e.printStackTrace();
         }
 
-        System.out.println("NUMBER OF INTERACTIONS BY POTENTIAL");
-        System.out.println("-----------------------------------");
+        System.out.println("NUMBER OF INTERACTIONS BY MONTH");
+        System.out.println("-------------------------------");
         System.out.println("Input: " + printsdf.format(startDate) + " - " + printsdf.format(endDate));
-        System.out.println("| " + String.format("%1$18s", "Positive") + " | " + String.format("%1$18s", "Neutral") + " | " + String.format("%1$18s", "Negative") + " |");
-        System.out.println("| " + String.format("%1$18d", countPositive) + " | " + String.format("%1$18d", countNeutral) + " | " + String.format("%1$18d", countNegative) + " |");
-        System.out.println();
+
+        for (int a = 0; a < differenceInYear; a++) {
+            for (int b = 0; b < 12; b++) {
+                if (count[a][b] > 0) {
+                    System.out.print("| " + String.format("%1$10s", countDate[a][b]) + " |");
+                }
+            }
+        }
+        System.out.print("\n");
+
+        for (int a = 0; a < differenceInYear; a++) {
+            for (int b = 0; b < 12; b++) {
+                if (count[a][b] > 0) {
+                    System.out.print("| " + String.format("%1$10d", count[a][b]) + " |");
+                }
+            }
+        }
+        System.out.println("\n");
     }
 }
